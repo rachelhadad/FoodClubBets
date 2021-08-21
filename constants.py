@@ -62,8 +62,8 @@ round_number = "/html/body/div[3]/div[3]/table/tbody/tr/td[2]/center[3]/center[1
 
 # go_to_bank constants
 collect_interest_xpath = "/html/body/div[12]/div[3]/div[2]/div[2]/div[2]/div/form/input[3]"
-withdrawal_input_xpath = "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/form/div[2]/input[1]"
-withdrawal_button_xpath = "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/form/div[2]/input[2]"
+withdrawal_input_xpath = "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/form/div[1]/input[1]"
+withdrawal_button_xpath = "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/form/div[1]/input[2]"
 pin_input_xpath = "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/form/div[1]/input"
 
 # get_winnings constants

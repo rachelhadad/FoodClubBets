@@ -108,15 +108,18 @@ def place_bets(driver):
         soup = BeautifulSoup(boochi_page_file, "html.parser")
         table = soup.find_all("b")[2].text
         boochi_winnings_odds_split = table.split(":")[0]
-        boochi_winnings_odds = int(boochi_winnings_odds_split)
+        if boochi_winnings_odds_split == "skipped" or boochi_winnings_odds_split == "Skipped":
+            boochi_winnings_odds = int(0)
+        else:
+            boochi_winnings_odds = int(boochi_winnings_odds_split)
     cur.execute("UPDATE food_club SET boochi_winnings_odds = ? WHERE date = ?",
                 (boochi_winnings_odds, constants.yesterday,))
     con.commit()
 
     # Print database information
-    bets_data = cur.execute("SELECT * FROM food_club ORDER BY round")
+    bets_data = cur.execute("SELECT * FROM food_club ORDER BY round DESC LIMIT 2")
     data = bets_data.fetchall()
-    print(data)
+    print(f"Data: {data}")
     fetch_winnings_sum = cur.execute("SELECT SUM(winnings_amount) FROM food_club").fetchone()
     winnings_sum = int(fetch_winnings_sum[0])
     print("Total winnings: " + "{:,}".format(winnings_sum))
@@ -127,6 +130,10 @@ def place_bets(driver):
     print("Delta: " + "{:,}".format(delta_cost))
     roi = delta_cost / cost_sum
     print("Roi: " + "{0:.0%}".format(roi))
+    fetch_winnings_odds_sum = cur.execute("SELECT SUM(winnings_odds) FROM food_club").fetchone()
+    fethch_boochi_winnings_odds_sum = cur.execute("SELECT SUM(boochi_winnings_odds) FROM food_club").fetchone()
+    print(f"Sum of winnings odds: {fetch_winnings_odds_sum}")
+    print(f"Sum of boochi odds: {fethch_boochi_winnings_odds_sum}")
 
 
 chauffeur = get_betting_table()

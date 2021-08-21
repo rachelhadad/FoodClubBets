@@ -24,8 +24,11 @@ def get_betting_table():
     username.send_keys(USERNAME)
     time.sleep(1)
     password = driver.find_element_by_id("loginPassword")
-    password.send_keys(PASSWORD + Keys.ENTER)
-    time.sleep(2)
+    password.send_keys(PASSWORD)
+    time.sleep(3)
+    login_button = driver.find_element_by_id("loginButton")
+    login_button.click()
+    time.sleep(4)
 
     driver.get("http://www.neopets.com//~coldBlackWind")
 
