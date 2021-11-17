@@ -68,7 +68,6 @@ def get_winnings(driver):
             print(f"Winnings: f{total_winnings}")
         fetch_bet_tuple = cur.execute("SELECT * FROM food_club ORDER BY round DESC LIMIT 1")
         fetch_bet = fetch_bet_tuple.fetchone()
-        print(f"Previous bet: {fetch_bet}")
         bet_amount = fetch_bet[0]
         roi = round(((total_winnings - bet_amount) / total_winnings) * 100, 2)
         # Call function input_winnings to insert the variables we just assigned
@@ -77,7 +76,6 @@ def get_winnings(driver):
         # TODO only collect winnings if it's not 7 days before end of month
         collect_winnings = driver.find_element_by_xpath(constants.collect_winnings_xpath)
         collect_winnings.click()
-    print("Got winnings info.")
     # Print data to look at before new bet information is inserted
     fetch_data = cur.execute("SELECT * from food_club")
     data = fetch_data.fetchall()

@@ -119,7 +119,6 @@ def place_bets(driver):
     # Print database information
     bets_data = cur.execute("SELECT * FROM food_club ORDER BY round DESC LIMIT 2")
     data = bets_data.fetchall()
-    print(f"Data: {data}")
     fetch_winnings_sum = cur.execute("SELECT SUM(winnings_amount) FROM food_club").fetchone()
     winnings_sum = int(fetch_winnings_sum[0])
     print("Total winnings: " + "{:,}".format(winnings_sum))
